@@ -2,10 +2,11 @@
 
 Start up all the 3 services:
 
+```
 8080                  8081                    8082
 zuul-proxy -------->  foo-service --------->  bar-service
 sleuth 2.0.1          sleuth 2.1.0.M1         sleuth 1.3.5
-
+```
 
 3 log files are created:
 
