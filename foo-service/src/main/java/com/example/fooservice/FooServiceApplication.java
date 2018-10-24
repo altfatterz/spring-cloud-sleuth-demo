@@ -55,16 +55,8 @@ class FooController {
     public String foo(HttpServletRequest request) {
 
         logHeaders(request);
-
         log.info("foo-service called...");
         performance.info("foo-service called...");
-
-        log.info("Hello from service1. Setting baggage foo=>bar");
-        Span span = tracer.currentSpan();
-
-        String baggageKey = "key";
-        String baggageValue = request.getHeader("trId");
-        ExtraFieldPropagation.set(baggageKey, baggageValue);
 
         String barResponse = restTemplate.getForObject("http://localhost:8082", String.class);
         return "bar response:" + barResponse;
