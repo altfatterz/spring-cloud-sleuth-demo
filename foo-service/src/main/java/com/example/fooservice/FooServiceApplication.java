@@ -1,6 +1,9 @@
 package com.example.fooservice;
 
+import brave.Span;
+import brave.Tracer;
 import brave.propagation.CurrentTraceContext;
+import brave.propagation.ExtraFieldPropagation;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,8 +44,11 @@ class FooController {
 
     private final RestTemplate restTemplate;
 
-    public FooController(RestTemplate restTemplate) {
+    private final Tracer tracer;
+
+    public FooController(RestTemplate restTemplate, Tracer tracer) {
         this.restTemplate = restTemplate;
+        this.tracer = tracer;
     }
 
     @GetMapping("/")
@@ -52,6 +58,13 @@ class FooController {
 
         log.info("foo-service called...");
         performance.info("foo-service called...");
+
+        log.info("Hello from service1. Setting baggage foo=>bar");
+        Span span = tracer.currentSpan();
+
+        String baggageKey = "key";
+        String baggageValue = request.getHeader("trId");
+        ExtraFieldPropagation.set(baggageKey, baggageValue);
 
         String barResponse = restTemplate.getForObject("http://localhost:8082", String.class);
         return "bar response:" + barResponse;

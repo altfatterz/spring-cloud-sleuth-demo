@@ -52,7 +52,9 @@ public class CustomSlf4jCurrentTraceContext extends CurrentTraceContext {
         final String legacySpanExportable = MDC.get(LEGACY_EXPORTABLE_NAME);
 
         if (currentSpan != null) {
-            MDC.put("requestId", ExtraFieldPropagation.get(currentSpan, "trId"));
+
+            String trId = ExtraFieldPropagation.get(currentSpan, "trId");
+            MDC.put("requestId", trId);
 
             String traceIdString = currentSpan.traceIdString();
             MDC.put("traceId", traceIdString);
