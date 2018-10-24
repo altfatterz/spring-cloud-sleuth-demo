@@ -34,18 +34,9 @@ foo-performance.log will contain:
 
 bar-performance.log will contain:
 ```
-18-10-24 Wed 13:34:05.215  INFO [component=bar-service,requestId=] bar-service called...
+18-10-24 Wed 13:34:05.215  INFO [component=bar-service,requestId=test] bar-service called...
 ```
 
-As you can see the bar-service doesn't get populated the `requestId` MDC field. 
-What do to in order to be populated? :)
+Next steps:
 
-
-Weird thing is that setting the  
-
-```bash
-spring.sleuth.baggage-keys=trId
-spring.sleuth.log.slf4j.whitelisted-mdc-keys=trId
-```
-
-inside the `foo-service`, it is expected that the `bar-service` receives the `baggage-trId` header but it doesn't. 
+Use the `spring.sleuth.log.slf4j.whitelisted-mdc-keys` instead of extending the `CurrentTraceContext`
