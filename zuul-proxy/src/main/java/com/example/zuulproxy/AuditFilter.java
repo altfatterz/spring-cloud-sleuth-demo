@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 public class AuditFilter extends ZuulFilter {
 
+    private final Logger performance = LoggerFactory.getLogger("performance-logger");
+
     @Override
     public String filterType() {
         return "pre";
@@ -31,6 +33,7 @@ public class AuditFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
 
+        performance.info(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
         log.info(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
 
         return null;
