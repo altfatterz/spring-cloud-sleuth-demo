@@ -10,6 +10,7 @@
     <modules>
         <module>bar-service</module>
         <module>foo-service</module>
+        <module>zuul-proxy</module>
     </modules>
 
 </project>

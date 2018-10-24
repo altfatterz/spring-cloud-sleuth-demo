@@ -36,7 +36,7 @@ class FooController {
     @GetMapping("/")
     public String foo() {
         log.info("foo-service called...");
-        String barResponse = restTemplate.getForObject("http://localhost:8081", String.class);
+        String barResponse = restTemplate.getForObject("http://localhost:8082", String.class);
         return "bar response:" + barResponse;
     }
 }
