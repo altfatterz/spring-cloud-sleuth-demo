@@ -1,9 +1,7 @@
 package com.example.fooservice;
 
-import brave.Span;
 import brave.Tracer;
 import brave.propagation.CurrentTraceContext;
-import brave.propagation.ExtraFieldPropagation;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,40 +31,5 @@ public class FooServiceApplication {
     @Bean
     public CurrentTraceContext currentTraceContext() {
         return CustomSlf4jCurrentTraceContext.create();
-    }
-}
-
-@RestController
-@Slf4j
-class FooController {
-
-    private final Logger performance = LoggerFactory.getLogger("performance-logger");
-
-    private final RestTemplate restTemplate;
-
-    private final Tracer tracer;
-
-    public FooController(RestTemplate restTemplate, Tracer tracer) {
-        this.restTemplate = restTemplate;
-        this.tracer = tracer;
-    }
-
-    @GetMapping("/")
-    public String foo(HttpServletRequest request) {
-
-        logHeaders(request);
-        log.info("foo-service called...");
-        performance.info("foo-service called...");
-
-        String barResponse = restTemplate.getForObject("http://localhost:8082", String.class);
-        return "bar response:" + barResponse;
-    }
-
-    private void logHeaders(HttpServletRequest request) {
-        Enumeration<String> headerNames = request.getHeaderNames();
-        while(headerNames.hasMoreElements()) {
-            String headerName = headerNames.nextElement();
-            log.info(String.format("%s:%s", headerName, request.getHeader(headerName)));
-        }
     }
 }

@@ -1,36 +1,32 @@
-package com.example.barservice;
+package com.example.fooservice;
 
+import brave.Tracer;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 
-@SpringBootApplication
 @RestController
 @Slf4j
-public class BarServiceApplication {
+public class FooController {
 
-    private final Logger performance = LoggerFactory.getLogger("performance-logger");
+    private final FooService fooService;
 
-    public static void main(String[] args) {
-        SpringApplication.run(BarServiceApplication.class, args);
+    public FooController(FooService fooService) {
+        this.fooService = fooService;
     }
 
     @GetMapping("/")
-    public String bar(HttpServletRequest request) throws InterruptedException {
+    public String foo(HttpServletRequest request) {
+
         logHeaders(request);
+        log.info("foo-service controller called...");
 
-        Thread.sleep(500);
-
-        performance.info("bar-service called...");
-        log.info("bar-service called...");
-        return "bar";
+        return "response:" + fooService.getFoo();
     }
 
     private void logHeaders(HttpServletRequest request) {
@@ -40,5 +36,4 @@ public class BarServiceApplication {
             log.info(String.format("%s:%s", headerName, request.getHeader(headerName)));
         }
     }
-
 }

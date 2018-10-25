@@ -7,7 +7,7 @@
 
     <appender name="PERFORMANCE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder>
-            <pattern>%d{yy-MM-dd E HH:mm:ss.SSS} %5p [component=${springAppName},requestId=%X{requestId:-}] %m%n</pattern>
+            <pattern>%d{yy-MM-dd E HH:mm:ss.SSS} %5p component=${springAppName} requestId=%X{requestId:-} %m%n</pattern>
         </encoder>
         <file>${PERFORMANCE_LOG_FILE}</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
