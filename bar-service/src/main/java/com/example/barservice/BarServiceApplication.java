@@ -24,7 +24,7 @@ public class BarServiceApplication {
 
     @GetMapping("/")
     public String bar(HttpServletRequest request) throws InterruptedException {
-        logHeaders(request);
+        //logHeaders(request);
 
         Thread.sleep(500);
 

@@ -1,7 +1,10 @@
 package com.example.fooservice;
 
 import brave.Tracer;
+import brave.handler.FinishedSpanHandler;
+import brave.handler.MutableSpan;
 import brave.propagation.CurrentTraceContext;
+import brave.propagation.TraceContext;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

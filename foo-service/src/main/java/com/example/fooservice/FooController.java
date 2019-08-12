@@ -23,7 +23,7 @@ public class FooController {
     @GetMapping("/")
     public String foo(HttpServletRequest request) {
 
-        logHeaders(request);
+        //logHeaders(request);
         log.info("foo-service controller called...");
 
         return "response:" + fooService.getFoo();

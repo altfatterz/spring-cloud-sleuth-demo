@@ -7,11 +7,13 @@ spring:
     log:
       slf4j:
         whitelisted-mdc-keys: trid
-
+    sampler:
+      probability: 1.0
 
 logging:
   level:
     org.springframework.cloud.sleuth: DEBUG
+    io.zipkin: debug
 
   pattern:
     console: '%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID} [${spring.application.name:-},%X{trid:-},%X{spanId:-},%X{spanExportable:-}] --- [%t] %-40.40logger{39} : %m%n'
