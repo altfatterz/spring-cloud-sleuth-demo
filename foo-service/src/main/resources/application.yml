@@ -1,0 +1,12 @@
+server:
+  port: 8081
+
+spring:
+  sleuth:
+    propagation-keys: trId
+
+    baggage-keys:
+
+logging:
+  level:
+    org.springframework.cloud.sleuth: DEBUG
