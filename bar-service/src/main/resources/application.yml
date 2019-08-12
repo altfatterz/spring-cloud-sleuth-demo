@@ -1,3 +1,17 @@
 server:
   port: 8082
 
+spring:
+  sleuth:
+    propagation-keys: trid
+    log:
+      slf4j:
+        whitelisted-mdc-keys: trid
+
+
+logging:
+  level:
+    org.springframework.cloud.sleuth: DEBUG
+
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID} [${spring.application.name:-},%X{trid:-},%X{spanId:-},%X{spanExportable:-}] --- [%t] %-40.40logger{39} : %m%n'

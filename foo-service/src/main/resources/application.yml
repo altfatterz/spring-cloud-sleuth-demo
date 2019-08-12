@@ -3,10 +3,15 @@ server:
 
 spring:
   sleuth:
-    propagation-keys: trId
+    propagation-keys: trid
+    log:
+      slf4j:
+        whitelisted-mdc-keys: trid
 
-    baggage-keys:
 
 logging:
   level:
     org.springframework.cloud.sleuth: DEBUG
+
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID} [${spring.application.name:-},%X{trid:-},%X{spanId:-},%X{spanExportable:-}] --- [%t] %-40.40logger{39} : %m%n'

@@ -28,8 +28,4 @@ public class FooServiceApplication {
         return builder.build();
     }
 
-    @Bean
-    public CurrentTraceContext currentTraceContext() {
-        return CustomSlf4jCurrentTraceContext.create();
-    }
 }

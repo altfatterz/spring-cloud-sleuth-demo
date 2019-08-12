@@ -19,8 +19,4 @@ public class ZuulProxyApplication {
         return new AuditFilter();
     }
 
-    @Bean
-    public CurrentTraceContext currentTraceContext() {
-        return CustomSlf4jCurrentTraceContext.create();
-    }
 }
